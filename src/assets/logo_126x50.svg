@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="126px" height="50px" viewBox="0 0 126 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57 (83077) - https://sketch.com -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="50" height="50" rx="25"></rect>
+    </defs>
+    <g id="Dashboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页-1" transform="translate(-30.000000, -30.000000)">
+            <g id="logo" transform="translate(30.000000, 30.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#FFFFFF" xlink:href="#path-1"></use>
+                <g id="1" mask="url(#mask-2)">
+                    <g transform="translate(13.000000, 13.000000)">
+                        <path d="M24,15 L24,21 C24,22.6568542 22.6568542,24 21,24 L12,24 L12,18 L12,18 C12,16 13,15 15,15 L24,15 Z M10,-1.77635684e-15 L5,9 L0,9 L0,3 C-2.02906125e-16,1.34314575 1.34314575,-1.91608686e-15 3,-1.77635684e-15 L10,-1.77635684e-15 Z" id="矩形-2" fill="#FA6B03"></path>
+                        <path d="M13,0 C18.3333333,0 21.6666667,0 23,0 C24.3333333,0 24.8580543,0.772328378 24.574163,2.31698513 L18,13 L15,13 C11.6666667,13 10,14.6666667 10,18 C10,21.3333333 10,23.3333333 10,24 C6,24 3.33333333,24 2,24 C0.666666667,24 0.123026214,23.2176693 0.369078643,21.653008 L13,0 Z" id="矩形" fill="#003D6E"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
