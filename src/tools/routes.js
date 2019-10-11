@@ -6,9 +6,6 @@ import Account from '../components/indexMan/account/account'
 import SystemInfo from '../components/indexMan/systemInfo/systemInfo'
 import AddressList from '../components/communicationMan/addressList/addressList'
 import Temporary from '../components/communicationMan/temporary/temporary'
-import SMSRS from '../components/smsMan/smsRS/smsRS'
-import SMSTemplate from '../components/smsMan/smsTemplate/smsTemplate'
-import Tag from '../components/smsMan/tag/tag'
 import TacticsTemplate from '../components/businessMan/tacticsTemplate/tacticsTemplate'
 import BPlan from '../components/businessMan/bPlan/bPlan'
 import PlanLog from '../components/logMan/planLog/planLog'
@@ -42,9 +39,6 @@ const router = new VueRouter({
         { path: 'SystemInfo', component: SystemInfo },
         { path: 'AddressList', component: AddressList },
         { path: 'Temporary', component: Temporary },
-        { path: 'SMSRS', component: SMSRS },
-        { path: 'SMSTemplate', component: SMSTemplate },
-        { path: 'Tag', component: Tag },
         { path: 'TacticsTemplate', component: TacticsTemplate },
         { path: 'BPlan', component: BPlan },
         { path: 'PlanLog', component: PlanLog },

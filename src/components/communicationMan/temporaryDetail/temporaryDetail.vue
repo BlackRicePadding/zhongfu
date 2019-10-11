@@ -3,30 +3,6 @@
         <div class="pad-title">
             <span>{{sonArr.row.name}}</span><span style="margin-left: 15px;">({{sonArr.row.count}})人</span>
             <el-button @click="Back()" style="position: absolute; right: 10px; top: 3px; ">返回</el-button>
-            <!--<el-popover-->
-                <!--placement="bottom"-->
-                <!--style="position: absolute;top: 3px;right: 15px;"-->
-                <!--width="350"-->
-                <!--trigger="click">-->
-                <!--<el-form :inline="true" :model="formInline" class="demo-form-inline" style="text-align: left;margin-top: 25px;">-->
-                    <!--<el-form-item label="用户姓名" style="margin-left: 25px" prop="name">-->
-                        <!--<el-input v-model="formInline.name" @keyup.native="validateX" @keydown.native="validateX" style="width: 220px;" placeholder="请输入用户姓名"></el-input>-->
-                    <!--</el-form-item>-->
-                    <!--<el-form-item label="注册时间" style="margin-left: 25px;">-->
-                        <!--<el-date-picker-->
-                            <!--v-model="formInline['addTime']"-->
-                            <!--type="date"-->
-                            <!--placeholder="选择日期"-->
-                            <!--value-format="yyyy-MM-dd">-->
-                        <!--</el-date-picker>-->
-                    <!--</el-form-item>-->
-                    <!--<el-form-item style="margin-left: 94px;">-->
-                        <!--<el-button type="primary" plain size="medium" @click="onSelect">搜索</el-button>-->
-                        <!--<el-button size="medium" @click="onReset">重置</el-button>-->
-                    <!--</el-form-item>-->
-                <!--</el-form>-->
-                <!--<el-button slot="reference">筛选</el-button>-->
-            <!--</el-popover>-->
         </div>
         <div class="content">
             <div style="height: 20px;"></div>

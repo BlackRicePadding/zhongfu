@@ -20,22 +20,27 @@
                         <el-menu-item index="/SystemProject" @click="setIndex('/SystemProject')">
                             <i class="iconfont icon-xitongcanshushezhi bigI" v-if="isCollapse"></i>
                             <i class="iconfont icon-yuandian" v-if="!isCollapse"></i>
-                            <span slot="title">项目</span>
+                            <span slot="title">表单设置</span>
                         </el-menu-item>
-                        <el-menu-item index="/SystemCase" @click="setIndex('/SystemCase')">
+                        <el-menu-item index="/SystemProjectSF" @click="setIndex('/SystemProject')">
                             <i class="iconfont icon-xitongcanshushezhi bigI" v-if="isCollapse"></i>
                             <i class="iconfont icon-yuandian" v-if="!isCollapse"></i>
-                            <span slot="title">病历</span>
+                            <span slot="title">访问规则</span>
                         </el-menu-item>
-                        <el-menu-item index="/SystemIndex" @click="setIndex('/SystemIndex')">
+                        <el-menu-item index="/SystemProject" @click="setIndex('/SystemProject')">
                             <i class="iconfont icon-xitongcanshushezhi bigI" v-if="isCollapse"></i>
                             <i class="iconfont icon-yuandian" v-if="!isCollapse"></i>
-                            <span slot="title">统计</span>
+                            <span slot="title">数据规则库</span>
+                        </el-menu-item>
+                        <el-menu-item index="/SystemProject" @click="setIndex('/SystemProject')">
+                            <i class="iconfont icon-xitongcanshushezhi bigI" v-if="isCollapse"></i>
+                            <i class="iconfont icon-yuandian" v-if="!isCollapse"></i>
+                            <span slot="title">数据通用设置</span>
                         </el-menu-item>
                     </el-submenu>
 <!--                    <el-menu-item index="/SystemProject" @click="changeList(1)"><i class="iconfont icon-fangzi"></i><span>数据库设计</span></el-menu-item>-->
-                    <el-menu-item index="/SystemUsers" @click="changeList(6)"><i class="iconfont icon-xitong"></i><span>数据库应用</span></el-menu-item>
-                    <el-menu-item index="/SystemUsers" @click="changeList(6)"><i class="iconfont icon-xitong"></i><span>系统管理</span></el-menu-item>
+                    <el-menu-item index="/SystemCase" @click="changeList(6)"><i class="iconfont icon-xitong"></i><span>数据库应用</span></el-menu-item>
+                    <el-menu-item index="/SystemIndex" @click="changeList(6)"><i class="iconfont icon-xitong"></i><span>系统管理</span></el-menu-item>
                 </el-menu>
                 <div class="logOut" @click="centerDialogVisible=true">
                     <i class="iconfont icon-tubiaozhizuomobanyihuifu-"></i>

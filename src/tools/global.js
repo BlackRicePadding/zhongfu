@@ -5,7 +5,7 @@
  */
 
 // 后台管理系统服务器地址
-export const baseUrl = 'http://192.168.0.150:8011/api'
+export const baseUrl = 'http://192.168.1.236:8011/api'
 // export const baseUrl = 'http://xuyejiang520.yicp.io/api'
 // 系统数据备份还原服务器地址
 export const backupBaseUrl = 'http://192.168.0.150:8002'
