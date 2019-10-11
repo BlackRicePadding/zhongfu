@@ -1,27 +1,52 @@
 <template>
     <el-row style="width:98%;margin-top:15px;margin-left: 1%;">
-        <el-col style="margin-top: 10px;padding-right: 10px;" :span="6" v-for="(o, index) in projects">
-            <el-card :body-style="{ padding: '0px' }">
-                <el-row>
-                    <el-col :span="10" class="circle">
-                    </el-col>
-                    <el-col :span="10">
-                        <el-row class="case-title">{{o.formname}}</el-row>
-                        <el-row class="case-time">{{doTime(o.updatetime)}}</el-row>
-                    </el-col>
-                    <el-col :span="2">
-                        <el-dropdown trigger="click" placement="bottom" style="float:right;margin-right: 13px;margin-top: 13px;">
-                            <span style="float:right" class="el-dropdown-link">
-                            · · ·
-                            </span>
-                            <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item @click.native="handleForm(o.content,o.id)" divided>编辑病例</el-dropdown-item>
-                            </el-dropdown-menu>
-                        </el-dropdown>
-                    </el-col>
-                </el-row>
-            </el-card>
-        </el-col>
+        <el-table
+            ref="table"
+            :data="projects"
+            tooltip-effect="dark"
+            style="width: 80%;margin-left: 10%">
+            <el-table-column
+                align="center"
+                header-align="center"
+                label="id"
+                prop="id"
+                width="50">
+            </el-table-column>
+            <el-table-column
+                align="center"
+                header-align="center"
+                label="名称"
+                prop="formname"
+                min-width="120">
+            </el-table-column>
+            <el-table-column
+                align="center"
+                header-align="center"
+                prop="updatetime"
+                :formatter="doTime"
+                label="时间"
+                min-width="120">
+            </el-table-column>
+            <el-table-column
+                align="center"
+                header-align="center"
+                label="操作"
+                min-width="120">
+                <template slot-scope="scope">
+                    <el-button
+                        size="mini"
+                        type="danger"
+                        @click="handleForm(scope.row.content, scope.row.id)">修改</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+        <el-pagination
+            @current-change="getIndexInfo"
+            :current-page="page"
+            :page-size="pageSize"
+            layout="total, prev, pager, next"
+            :total="total">
+        </el-pagination>
         <el-dialog title="编辑表单" width="99%" top="15px" :visible.sync="dialogVisibleInfo">
             <fm-making-form
                 ref="makingform"
@@ -53,7 +78,8 @@
     data () {
       return {
         page:1,
-        pageSize: 1000,
+        pageSize: 15,
+        total:0,
         projects:[],
         jsonData:[],
         dialogVisibleInfo:false,
@@ -72,7 +98,7 @@
         }
         this.$api.form.findPage(params).then((res) => {
           this.projects = res.data.content;
-          console.log(this.projects)
+          this.total = res.data.totalSize;
         })
       },
       handleForm(content,id){
@@ -108,8 +134,8 @@
         this.dialogVisibleInfo = false;
         this.editId = 0;
       },
-      doTime(time){
-        let d = new Date(time);
+      doTime(row, column, cellValue, index){
+        let d = new Date(cellValue);
         return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
       }
     }

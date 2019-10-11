@@ -4,7 +4,6 @@
             <el-header background-color="#D8DDEC" style="height: 61px;padding: 0;box-sizing: border-box;position: relative;min-width: 1040px">
                 <div class="top-border"></div>
                 <div class="logo">中智云福</div>
-
                 <el-menu
                     style="position:absolute;left: 202px;width: calc(100% - 210px);"
                     :default-active="activeIndex"
@@ -14,33 +13,46 @@
                     background-color="#fff"
                     :router="true"
                     text-color="#999">
-                    <el-menu-item index="/SystemProject" @click="changeList(1)"><i class="iconfont icon-fangzi"></i><span>首页</span></el-menu-item>
+                    <el-menu-item index="SystemProject"><i class="iconfont icon-fangzi"></i><span>首页</span></el-menu-item>
                     <el-submenu index="2">
                         <template slot="title"><i class="iconfont icon-fangzi"></i><span>数据库设计</span></template>
-                        <el-menu-item index="/SystemProject" @click="setIndex('/SystemProject')">
-                            <i class="iconfont icon-xitongcanshushezhi bigI" v-if="isCollapse"></i>
-                            <i class="iconfont icon-yuandian" v-if="!isCollapse"></i>
+                        <el-menu-item  index="SystemCase">
                             <span slot="title">表单设置</span>
                         </el-menu-item>
-                        <el-menu-item index="/SystemProjectSF" @click="setIndex('/SystemProject')">
-                            <i class="iconfont icon-xitongcanshushezhi bigI" v-if="isCollapse"></i>
-                            <i class="iconfont icon-yuandian" v-if="!isCollapse"></i>
+                        <el-menu-item index="SystemProjectSF">
                             <span slot="title">访问规则</span>
                         </el-menu-item>
-                        <el-menu-item index="/SystemProject" @click="setIndex('/SystemProject')">
-                            <i class="iconfont icon-xitongcanshushezhi bigI" v-if="isCollapse"></i>
-                            <i class="iconfont icon-yuandian" v-if="!isCollapse"></i>
+                        <el-menu-item>
                             <span slot="title">数据规则库</span>
                         </el-menu-item>
-                        <el-menu-item index="/SystemProject" @click="setIndex('/SystemProject')">
-                            <i class="iconfont icon-xitongcanshushezhi bigI" v-if="isCollapse"></i>
-                            <i class="iconfont icon-yuandian" v-if="!isCollapse"></i>
+                        <el-menu-item>
                             <span slot="title">数据通用设置</span>
                         </el-menu-item>
                     </el-submenu>
-<!--                    <el-menu-item index="/SystemProject" @click="changeList(1)"><i class="iconfont icon-fangzi"></i><span>数据库设计</span></el-menu-item>-->
-                    <el-menu-item index="/SystemCase" @click="changeList(6)"><i class="iconfont icon-xitong"></i><span>数据库应用</span></el-menu-item>
-                    <el-menu-item index="/SystemIndex" @click="changeList(6)"><i class="iconfont icon-xitong"></i><span>系统管理</span></el-menu-item>
+                    <el-submenu index="3">
+                        <template slot="title"><i class="iconfont icon-fangzi"></i><span>数据库应用</span></template>
+                        <el-menu-item>
+                            <span slot="title">统计分析</span>
+                        </el-menu-item>
+                        <el-menu-item index="SystemSearch">
+                            <span slot="title">数据查询/导出</span>
+                        </el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="4">
+                        <template slot="title"><i class="iconfont icon-fangzi"></i><span>系统管理</span></template>
+                        <el-menu-item>
+                            <span slot="title">用户管理</span>
+                        </el-menu-item>
+                        <el-menu-item >
+                            <span slot="title">权限管理</span>
+                        </el-menu-item>
+                        <el-menu-item>
+                            <span slot="title">数据策略</span>
+                        </el-menu-item>
+                        <el-menu-item>
+                            <span slot="title">操作日志</span>
+                        </el-menu-item>
+                    </el-submenu>
                 </el-menu>
                 <div class="logOut" @click="centerDialogVisible=true">
                     <i class="iconfont icon-tubiaozhizuomobanyihuifu-"></i>
@@ -89,24 +101,7 @@
                 asideWidth: 'on',
                 asideWidth2: 'off',
                 currentTime: new Date().getTime() - 100,
-                newsLog: {},
-                indexFormList: [
-                  { "index": "1", "name": "病例筛选登记表" },
-                  { "index": "2", "name": "基本信息" },
-                  { "index": "3", "name": "人口学资料" },
-                  { "index": "4", "name": "就诊信息" },
-                  { "index": "5", "name": "诊断信息" },
-                  { "index": "6", "name": "家族史" },
-                  { "index": "7", "name": "临床事件记录" },
-                  { "index": "8", "name": "生活方式信息" },
-                  { "index": "9", "name": "体格检查" },
-                  { "index": "10", "name": "生命体征" },
-                  { "index": "11", "name": "实验室检查" },
-                  { "index": "12", "name": "治疗现状" },
-                  { "index": "13", "name": "门诊手术和有创操作" },
-                  { "index": "14", "name": "低血糖问卷" },
-                  { "index": "15", "name": "不良事件记录" }
-                ]
+                newsLog: {}
             }
         },
         methods: {
@@ -145,19 +140,6 @@
                 sessionStorage.clear();
                 this.$router.push({ path: '/Login'});
             },
-            changeList(bol) {
-                console.log(bol, this.bol, '***********');
-                this.bol = bol;
-                if (bol === 1) {
-                    this.$router.push({ path: '/SystemProject'})
-                }else if (bol === 2) {
-                  this.$router.push({ path: '/SystemInput'})
-                }else if (bol === 3) {
-                  this.$router.push({ path: '/SystemSearch'})
-                }else if (bol === 6) {
-                    this.$router.push({ path: '/SystemUsers'})
-                }
-            },
             changeWidth() {
                 window.addEventListener('resize', ()=> {
                     if (window.innerWidth < 750) {
@@ -170,16 +152,16 @@
             getUrl() {
                 if (this.$route.path === '/SystemProject' || this.$route.path === '/SystemCase') {
                     this.activeIndex = '/SystemIndex';
-                    this.bol = 1;
+                    // this.bol = 1;
                 }else if ( this.$route.path === '/SystemInput') {
                   this.activeIndex = '/SystemInput?id=1';
-                  this.bol = 2;
+                  // this.bol = 2;
                 } else if ( this.$route.path === '/SystemSearch') {
                   this.activeIndex = '/SystemSearch';
-                  this.bol = 3;
+                  // this.bol = 3;
                 } else if ( this.$route.path === '/SystemUsers' || this.$route.path === '/SystemRole'|| this.$route.path === '/SystemStrategy'|| this.$route.path === '/SystemLocation'|| this.$route.path === '/SystemHospital'|| this.$route.path === '/SystemTitle' || this.$route.path === '/SystemDepartment' || this.$route.path === '/SystemLogs' ) {
                     this.activeIndex = '/SystemParameter';
-                    this.bol = 6;
+                    // this.bol = 6;
                 }
             },
             OperatingWebsite() {
@@ -202,18 +184,12 @@
                         this.showNewsLog = false;
                     }
                 }
-            },
-            getLeftList() {
-                axios.get('../static/js/leftList.json').then((res) => {
-                    // console.log(res.data, '获取leftList');
-                    this.indexFormList = res.data
-                });
             }
         },
         mounted() {
             this.changeWidth();
             this.getUrl();
-            this.getLeftList()
+            // this.getLeftList()
             // this.stateList();
         }
     }

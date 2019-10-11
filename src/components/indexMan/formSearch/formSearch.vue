@@ -1,45 +1,61 @@
 <template>
     <div class="page-container">
-        <!--表格树内容栏-->
-        <el-row style="width:1000px;margin-left: 15%">
-            <el-form label-width="100px">
-                <el-form-item
-                    v-for="(value, key) in searchForm"
-                    :label="'检索条件：'">
-                    <el-select style="width: 300px;float: left;" v-model="value.type" placeholder="请选择">
-                        <el-option
-                            v-for="item in showEditor"
-                            :key="item.model"
-                            :label="item.name" :value="item.model">
-                        </el-option>
-                    </el-select>
-                    <el-input style="width: 400px;margin-left:10px;float: left;" v-model="value.value"></el-input>
-                    <el-button type="danger" icon="el-icon-delete" circle v-if="key!=0" style="margin-left:10px;float: left;" @click.prevent="removeSearch(value)"></el-button>
-                </el-form-item>
-                <el-form-item style="text-align: left;">
-                    <el-button type="success" @click="getPage">检索</el-button>
-                    <el-button type="primary" @click="exportToExcel">导出excel</el-button>
-                    <el-button @click="addSearch">增加检索条件</el-button>
-                </el-form-item>
-            </el-form>
+        <el-row>
+            <el-col :span="3">
+                <el-menu
+                    class="el-menu-vertical-demo"
+                     background-color="#545c64"
+                     text-color="#fff"
+                     active-text-color="#ffd04b">
+                    <el-menu-item v-for="(o,i) in leftList">
+                        <span slot="title" @click="changeId(o.id)">{{o.formname}}</span>
+                    </el-menu-item>
+                </el-menu>
+            </el-col>
+            <el-col :span="20":offset="1">
+                <!--表格树内容栏-->
+                <el-row style="width:1000px;margin-left: 15%;margin-top: 20px;">
+                    <el-form label-width="100px">
+                        <el-form-item
+                            v-for="(value, key) in searchForm"
+                            :label="'检索条件：'">
+                            <el-select style="width: 300px;float: left;" v-model="value.type" placeholder="请选择">
+                                <el-option
+                                    v-for="item in showEditor"
+                                    :key="item.model"
+                                    :label="item.name" :value="item.model">
+                                </el-option>
+                            </el-select>
+                            <el-input style="width: 400px;margin-left:10px;float: left;" v-model="value.value"></el-input>
+                            <el-button type="danger" icon="el-icon-delete" circle v-if="key!=0" style="margin-left:10px;float: left;" @click.prevent="removeSearch(value)"></el-button>
+                        </el-form-item>
+                        <el-form-item style="text-align: left;">
+                            <el-button type="success" @click="getPage">检索</el-button>
+                            <el-button type="primary" @click="exportToExcel">导出excel</el-button>
+                            <el-button @click="addSearch">增加检索条件</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-row>
+                <hr>
+                <el-table :data="tableData" stripe size="mini" style="width: 100%;" border>
+                    <el-table-column v-for="(val,key) in showEditor" :key="key" :prop="val.model" :label="val.name" width="150">
+                    </el-table-column>
+                    <el-table-column header-align="center" align="center" fixed="right" width="200">
+                        <template slot-scope="scope">
+                            <el-button @click="handleEdit(scope.row)">编辑</el-button>
+                            <el-button type="danger" @click="rowDel(scope.row.id)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <div class="toolbar" style="padding:10px;">
+                    <el-pagination layout="total, prev, pager, next, jumper"
+                                   @current-change="getPage"
+                                   :current-page.sync="page" :page-size="pageSize" :total="totalSizes" style="float:right;">
+                    </el-pagination>
+                </div>
+            </el-col>
         </el-row>
-        <hr>
-        <el-table :data="tableData" stripe size="mini" style="width: 100%;" border>
-            <el-table-column v-for="(val,key) in showEditor" :key="key" :prop="val.model" :label="val.name" width="150">
-            </el-table-column>
-            <el-table-column header-align="center" align="center" fixed="right" width="200">
-                <template slot-scope="scope">
-                    <el-button @click="handleEdit(scope.row)">编辑</el-button>
-                    <el-button type="danger" @click="rowDel(scope.row.id)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <div class="toolbar" style="padding:10px;">
-            <el-pagination layout="total, prev, pager, next, jumper"
-                           @current-change="getPage"
-                           :current-page.sync="page" :page-size="pageSize" :total="totalSizes" style="float:right;">
-            </el-pagination>
-        </div>
+
         <el-dialog @on-close="dialogVisible = false" title='编辑数据' width="60%" top="15px" :visible.sync="dialogVisible">
             <hr class="show-hr">
             <GenerateForm
@@ -98,6 +114,7 @@
         filterVal:null,
         tHeader:null,
         disc:null,
+        leftList:[]
       }
     },
     methods: {
@@ -313,40 +330,28 @@
           })
         })
       },
-      getDisc(){
+      getCases(){
         let params = {
           'page':1,
-          'pageSize':10000
+          'pageSize':100,
         }
-        this.$api.formDisc.findPage(params).then((res) => {
-          let data = res.data.content;
-          this.disc = [];
-          data.forEach((val,key)=>{
-            let cont = JSON.parse(val.content);
-            let child = [];
-            cont.forEach((v,k)=>{
-              child.push({
-                label:v.label,
-                value:v.value
-              })
-            })
-            let temp = {
-              name:val.name,
-              key:val.id,
-              value:val.name,
-              child:child
-            }
-            this.disc.push(temp)
-          })
-          console.log(this.disc)
+        this.$api.form.findPage(params).then((res) => {
+          this.leftList = res.data.content;
+          console.log(this.leftList)
         })
       },
+      changeId(id){
+        this.formListId = id;
+        this.getPage();
+        this.getInfo();
+        this.getCases();
+      }
     },
     mounted() {
       this.formListId = (typeof(this.$route.query.id) != 'undefined')?this.$route.query.id:1;
       this.getPage();
       this.getInfo();
-      this.getDisc();
+      this.getCases();
     }
   }
 </script>

@@ -3,7 +3,7 @@
         <el-row style="margin-top: 30px;">
             <el-col :span="4" :offset="1">
                 <el-tabs style="height: 800px;"  type="border-card">
-                    <el-steps style="height: 750px;" direction="vertical" :active="active" finish-status="success">
+                    <el-steps style="height: 750px;" direction="vertical" finish-status="wait" process-status="success" :active="active">
                         <template v-for="(o,i) in projectData.remarks" >
                             <el-step @click.native="check(oc,getIndex(i,ic))" v-for="(oc,ic) in o.child" :title="o.name+' '+oc.name"></el-step>
                         </template>
